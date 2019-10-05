@@ -118,7 +118,7 @@ end
 
 def draw?
   #returns true if board is full & hasn't been won, false if board is won, false if board isn't full or won
-  full?(@board) && !won?(@board)
+  full? && !won?
 end
 
 def over?
