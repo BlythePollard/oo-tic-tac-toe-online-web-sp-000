@@ -4,3 +4,10 @@ require_relative '../lib/tic_tac_toe.rb'
 
 #instantiate instance of tic_tac_toe
 #start game by calling #play on instance
+
+board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+
+puts "Welcome to Tic Tac Toe!"
+display_board
+
+play
