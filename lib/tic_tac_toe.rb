@@ -123,15 +123,15 @@ end
 
 def over?
   #returns true if board has been won or is full
-  won?(board) || draw?(board)
+  won? || draw?
 end
 
-def winner(board)
+def winner
   #givenb winning @board, returns x or o who has won
   over?(board) #make sure it's over
-  if won?(board) #see if anyone won, return that array
-    index = won?(board)[0] #index = first unit of winning array
-    board[index] #retrieve value of that first unit
+  if won? #see if anyone won, return that array
+    index = won?[0] #index = first unit of winning array
+    @board[index] #retrieve value of that first unit
   elsif false  
 end
 end
