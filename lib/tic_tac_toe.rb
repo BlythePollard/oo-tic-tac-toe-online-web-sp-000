@@ -111,14 +111,14 @@ def won?
   
 def full?
   #returns true if every element on board contains x or o
-  board.all? do |position|
+  @board.all? do |position|
   position == "X" || position == "O" 
 end
 end
 
 def draw?
   #returns true if board is full & hasn't been won, false if board is won, false if board isn't full or won
-  full?(board) && !won?(board)
+  full?(@board) && !won?(@board)
 end
 
 def over?
