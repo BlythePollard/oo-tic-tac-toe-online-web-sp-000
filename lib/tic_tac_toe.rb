@@ -140,8 +140,8 @@ def play
   #main method--responsible for game loop
   #Allow players to take turns, check if game is over after every turn
   #at end of game, reports outcome of game
-  until over?(board)
-    turn(board)
+  until over?
+    turn
   end
   if won?(board)
     puts "Congratulations #{winner(board)}!"
