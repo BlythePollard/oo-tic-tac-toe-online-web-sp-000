@@ -128,7 +128,7 @@ end
 
 def winner
   #givenb winning @board, returns x or o who has won
-  over?(board) #make sure it's over
+  over? #make sure it's over
   if won? #see if anyone won, return that array
     index = won?[0] #index = first unit of winning array
     @board[index] #retrieve value of that first unit
