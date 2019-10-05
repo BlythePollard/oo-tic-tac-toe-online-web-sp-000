@@ -6,7 +6,6 @@ class TicTacToe
    # @board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   #end
   
-  def se
   WIN_COMBINATIONS = [
      [0, 1, 2],
     [3, 4, 5],
@@ -18,7 +17,7 @@ class TicTacToe
     [2, 4, 6]
     ]
     
-   def self.display_board
+   def display_board
      @board = #based on @board, print current board representation
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
@@ -31,16 +30,16 @@ def input_to_index(user_input)
   user_input.to_i - 1
 end
 
-def move(board, user_input, value)
+def move(user_input, value)
   #takes 2 arguments: index in @board array, token x or o (default to x)
-  board[user_input.to_i] = value
+  @board[user_input.to_i] = value
 end
 
 def position_taken?(user_input)
   #evaluate user's desired move against the board
   #check to see whether that position is occupied, returning true if occupied, false if open
   #checks using index values b/c running after input to index
-  if board[user_input] == " " || board[user_input] == "" || board[user_input] == nil
+  if @board[user_input] == " " || @board[user_input] == "" || @board[user_input] == nil
     false
   else true
 end
@@ -48,7 +47,7 @@ end
 
 def valid_move?(user_input)
   #accept a position, check and return true if move is valid, false/nil if not
-  user_input.between?(0,8) && !position_taken?(board, user_input)
+  user_input.between?(0,8) && !position_taken?(user_input)
 end
 
 def turn
@@ -62,7 +61,7 @@ def turn
   user_input = gets.strip
   index = input_to_index(user_input)
   if valid_move?(index)
-    move(index, current_player(board))
+    move(index, current_player)
     display_board
   else 
     turn
