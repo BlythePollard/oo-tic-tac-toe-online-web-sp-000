@@ -2,9 +2,6 @@ class TicTacToe
    def initialize(board = nil)
     @board = board || Array.new(9, " ")
   end
-  #def initialize 
-   # @board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-  #end
   
   WIN_COMBINATIONS = [
      [0, 1, 2],
@@ -18,7 +15,6 @@ class TicTacToe
     ]
     
    def display_board
-    #based on @board, print current board representation
   puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
   puts "-----------"
   puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
@@ -31,14 +27,10 @@ def input_to_index(user_input)
 end
 
 def move(user_input, value)
-  #takes 2 arguments: index in @board array, token x or o (default to x)
   @board[user_input.to_i] = value
 end
 
 def position_taken?(user_input)
-  #evaluate user's desired move against the board
-  #check to see whether that position is occupied, returning true if occupied, false if open
-  #checks using index values b/c running after input to index
   if @board[user_input] == " " || @board[user_input] == "" || @board[user_input] == nil
     false
   else true
@@ -46,17 +38,10 @@ end
 end
 
 def valid_move?(user_input)
-  #accept a position, check and return true if move is valid, false/nil if not
   user_input.between?(0,8) && !position_taken?(user_input)
 end
 
 def turn
-  #ask user to for move 1-9
-  #receive input
-  #translate input into index value
-  #if move is valid, make move and display board
-  #if move invalid, ask for new move until valid move received
-  
   puts "Please enter 1-9:"
   user_input = gets.strip
   index = input_to_index(user_input)
@@ -69,7 +54,6 @@ def turn
  end
  
  def turn_count
-   #return number of turns played based on @board
  counter = 0 #counter at 0
     @board.each do |space| #check array starting at 0
       if space == "X" || space == "O" #if space is taken
@@ -80,7 +64,6 @@ def turn
 end  
 
 def current_player
-  #use turn_count method to determine whose turn it is
     if turn_count.even?
        "X"
     else 
@@ -89,7 +72,6 @@ def current_player
 end
 
 def won?
-  #use WIN_COMBINATIONS constant to return false.nil if no win combo, return winning combo indexes as array if there is win
   WIN_COMBINATIONS.each do |win_combination| 
       win_index_1 = win_combination[0]
       win_index_2 = win_combination[1]
@@ -110,36 +92,29 @@ def won?
   end
   
 def full?
-  #returns true if every element on board contains x or o
   @board.all? do |position|
   position == "X" || position == "O" 
 end
 end
 
 def draw?
-  #returns true if board is full & hasn't been won, false if board is won, false if board isn't full or won
   full? && !won?
 end
 
 def over?
-  #returns true if board has been won or is full
   won? || draw?
 end
 
 def winner
-  #givenb winning @board, returns x or o who has won
-  over? #make sure it's over
-  if won? #see if anyone won, return that array
-    index = won?[0] #index = first unit of winning array
-    @board[index] #retrieve value of that first unit
+  over? 
+  if won? 
+    index = won?[0] 
+    @board[index] 
   elsif false  
 end
 end
 
 def play
-  #main method--responsible for game loop
-  #Allow players to take turns, check if game is over after every turn
-  #at end of game, reports outcome of game
   until over?
     turn
   end
