@@ -4,6 +4,7 @@ class TicTacToe
     @board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
   
+  def se
   WIN_COMBINATIONS = [
      [0, 1, 2],
     [3, 4, 5],
@@ -15,7 +16,8 @@ class TicTacToe
     [2, 4, 6]
     ]
     
-   def display_board(board)
+   def self.display_board
+     @board = #based on @board, print current board representation
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
   puts " #{board[3]} | #{board[4]} | #{board[5]} "
@@ -28,33 +30,45 @@ def input_to_index(user_input)
 end
 
 def move(board, user_input, value)
+  #takes 2 arguments: index in @board array, token x or o (default to x)
   board[user_input.to_i] = value
 end
 
-def position_taken?(board, user_input)
+def position_taken?(user_input)
+  #evaluate user's desired move against the board
+  #check to see whether that position is occupied, returning true if occupied, false if open
+  #checks using index values b/c running after input to index
   if board[user_input] == " " || board[user_input] == "" || board[user_input] == nil
     false
   else true
 end
 end
 
-def valid_move?(board, user_input)
+def valid_move?(user_input)
+  #accept a position, check and return true if move is valid, false/nil if not
   user_input.between?(0,8) && !position_taken?(board, user_input)
 end
 
-def turn(board)
+def turn
+  #ask user to for move 1-9
+  #receive input
+  #translate input into index value
+  #if move is valid, make move and display board
+  #if move invalid, ask for new move until valid move received
+  
   puts "Please enter 1-9:"
   user_input = gets.strip
   index = input_to_index(user_input)
-  if valid_move?(board, index)
-    move(board, index, current_player(board))
-    display_board(board)
+  if valid_move?(index)
+    move(index, current_player(board))
+    display_board
   else 
-    turn(board)
+    turn
   end
  end
  
- def turn_count(board) 
+ def turn_count
+   #return number of turns played based on @board
  counter = 0 #counter at 0
     board.each do |space| #check array starting at 0
       if space == "X" || space == "O" #if space is taken
@@ -64,15 +78,17 @@ def turn(board)
   counter
 end  
 
-def current_player(board)
-    if turn_count(board).even?
+def current_player
+  #use turn_count method to determine whose turn it is
+    if turn_count.even?
        "X"
     else 
        "O"
   end
 end
 
-def won?(board)
+def won?
+  #use WIN_COMBINATIONS constant to return false.nil if no win combo, return winning combo indexes as array if there is win
   WIN_COMBINATIONS.each do |win_combination| 
       win_index_1 = win_combination[0]
       win_index_2 = win_combination[1]
@@ -92,21 +108,25 @@ def won?(board)
     false
   end
   
-def full?(board)
+def full?
+  #returns true if every element on board contains x or o
   board.all? do |position|
   position == "X" || position == "O" 
 end
 end
 
-def draw?(board)
+def draw?
+  #returns true if board is full & hasn't been won, false if board is won, false if board isn't full or won
   full?(board) && !won?(board)
 end
 
-def over?(board)
+def over?
+  #returns true if board has been won or is full
   won?(board) || draw?(board)
 end
 
 def winner(board)
+  #givenb winning @board, returns x or o who has won
   over?(board) #make sure it's over
   if won?(board) #see if anyone won, return that array
     index = won?(board)[0] #index = first unit of winning array
@@ -115,7 +135,10 @@ def winner(board)
 end
 end
 
-def play(board)
+def play
+  #main method--responsible for game loop
+  #Allow players to take turns, check if game is over after every turn
+  #at end of game, reports outcome of game
   until over?(board)
     turn(board)
   end
@@ -124,4 +147,6 @@ def play(board)
   elsif draw?(board)
     puts "Cat's Game!"
   end
+end
+
 end
