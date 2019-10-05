@@ -18,7 +18,7 @@ class TicTacToe
     ]
     
    def display_board
-     @board = #based on @board, print current board representation
+     #based on @board, print current board representation
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
   puts " #{board[3]} | #{board[4]} | #{board[5]} "
