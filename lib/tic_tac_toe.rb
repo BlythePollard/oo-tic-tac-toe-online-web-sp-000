@@ -71,7 +71,7 @@ def turn
  def turn_count
    #return number of turns played based on @board
  counter = 0 #counter at 0
-    board.each do |space| #check array starting at 0
+    @board.each do |space| #check array starting at 0
       if space == "X" || space == "O" #if space is taken
       counter += 1 #then count one more
     end
